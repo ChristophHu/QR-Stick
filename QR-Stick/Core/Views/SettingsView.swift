@@ -10,11 +10,18 @@ internal import System
 
 struct SettingsView: View {
     @AppStorage(UserDefaultKeys.isDarkMode) private var isDarkMode: Bool = true
+    @AppStorage("useFaceID") private var useFaceID: Bool = false
+    
+    @State private var showAuthError: Bool = false
+    @State private var authErrorMessage: String = ""
     
     var body: some View {
         newSettingsView
-        .infinityFrame()
-        .background(Color.appTheme.viewBackground)
+            .infinityFrame()
+            .background(Color.appTheme.viewBackground)
+            .alert(authErrorMessage, isPresented: $showAuthError) {
+                Button("OK", role: .cancel) { }
+            }
     }
 }
 
@@ -51,6 +58,32 @@ private extension SettingsView {
                             Text("iOS")
                                 .foregroundColor(.secondary)
                         }
+                    }
+                }
+                
+                // Neue Security-Section mit Face ID Toggle
+                Section(header: Text("Sicherheit")) {
+                    Toggle("Use Face ID", isOn: $useFaceID)
+                        .disabled(!BiometryAuthenticator.isBiometryAvailable())
+                        .tint(Color.appTheme.accent)
+                        .onChange(of: useFaceID) { _, newValue in
+                            if newValue {
+                                BiometryAuthenticator().authenticate(reason: "Use Face ID to protect the app") { success, error in
+                                    DispatchQueue.main.async {
+                                        if !success {
+                                            useFaceID = false
+                                            authErrorMessage = error?.localizedDescription ?? "Face ID failed"
+                                            showAuthError = true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    if !BiometryAuthenticator.isBiometryAvailable() {
+                        Text("Face ID nicht verfügbar")
+                            .foregroundColor(.secondary)
+                            .font(.caption)
                     }
                 }
                     

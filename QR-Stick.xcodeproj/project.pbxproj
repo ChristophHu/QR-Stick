@@ -10,9 +10,33 @@
 		6631E3E32F1FB87200CB6DB6 /* QR-Stick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QR-Stick.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6631E4972F223A8400CB6DB6 /* Exceptions for "QR-Stick" folder in "QR-Stick" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Core/Views/FaceID.md,
+			);
+			target = 6631E3E22F1FB87200CB6DB6 /* QR-Stick */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		6631E4982F223A8400CB6DB6 /* Exceptions for "QR-Stick" folder in "Compile Sources" phase from "QR-Stick" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 6631E3DF2F1FB87200CB6DB6 /* Sources */;
+			membershipExceptions = (
+				Core/Views/FaceID.md,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6631E3E52F1FB87200CB6DB6 /* QR-Stick */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6631E4972F223A8400CB6DB6 /* Exceptions for "QR-Stick" folder in "QR-Stick" target */,
+				6631E4982F223A8400CB6DB6 /* Exceptions for "QR-Stick" folder in "Compile Sources" phase from "QR-Stick" target */,
+			);
 			path = "QR-Stick";
 			sourceTree = "<group>";
 		};
@@ -178,6 +202,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = FaceID_Debug;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -236,6 +261,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = FaceID_Release;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
