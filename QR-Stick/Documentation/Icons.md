@@ -72,3 +72,4 @@ In der Grundeinstellung der App unter `General/AppIcons and Launch Screen` muss 
 }
 ```
 
+Manchmal wird die Einstellung nicht korrekt übernommen. In diesem Fall muss die Einstellung manuell vorgenommen werden. Dazu ist in den Projekteinstellungen unter `Build Settings` nach der Begrifflichkeit `AppIcon` zu suchen. Dort ist unter `Alternate App Icon Set` jedes App Icon hinzuzufügen, damit es in der App verwendet werden kann. Zum Hinzufügen muss lediglich die Liste mit dem Iconnamen befüllt werden.
