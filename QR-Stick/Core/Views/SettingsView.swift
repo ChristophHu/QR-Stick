@@ -15,6 +15,15 @@ struct SettingsView: View {
     @State private var showAuthError: Bool = false
     @State private var authErrorMessage: String = ""
     
+    private let alternateAppIcons: [String] = [
+        "AppIcon-Backpack",
+        "AppIcon-Camera",
+        "AppIcon-Campfire",
+        "AppIcon-Glass",
+        "AppIcon-Map",
+        "AppIcon-Mushroom"
+    ]
+    
     var body: some View {
         newSettingsView
             .infinityFrame()
@@ -29,6 +38,40 @@ private extension SettingsView {
     var newSettingsView: some View {
         NavigationStack {
             List {
+                Section(header: Text("Icons")) {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            ForEach(alternateAppIcons.indices, id: \.self) { item in
+                                Button {
+                                    UIApplication.shared.setAlternateIconName(alternateAppIcons[item]) { error in
+                                        if error != nil {
+                                            print("Error setting alternate icon: \(String(describing: error?.localizedDescription))")
+                                        } else {
+                                            print("Successfully changed icon to \(alternateAppIcons[item])")
+                                        }
+                                    }
+                                } label: {
+                                    Image("\(alternateAppIcons[item])-Preview")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 80, height: 80)
+                                        .cornerRadius(16)
+                                }
+                                .buttonStyle(.borderless)
+                            }
+                        }
+                    }
+                    .padding(.top, 12)
+                    Text("Wähle dein bevorzugtes App-Symbol aus der Liste unten aus.")
+                        .infinityFrame()
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.secondary)
+                        .font(.footnote)
+                        .padding(.bottom, 12)
+                    
+                } //: Section
+                .listRowSeparator(.hidden)
+                
                 Section {
                     NavigationLink {
                         ThemeView(themeMode: isDarkMode ? .constant("Dark") : .constant("Light"))
