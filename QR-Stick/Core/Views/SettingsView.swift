@@ -15,6 +15,9 @@ struct SettingsView: View {
     @State private var showAuthError: Bool = false
     @State private var authErrorMessage: String = ""
     
+    let themes: [Theme] = themeData
+    @ObservedObject var theme = ThemeSettings()
+    
     private let alternateAppIcons: [String] = [
         "AppIcon-Backpack",
         "AppIcon-Camera",
@@ -72,6 +75,36 @@ private extension SettingsView {
                 } //: Section
                 .listRowSeparator(.hidden)
                 
+                // MARK: - SECTION 2
+                Section(header:
+                    HStack {
+                        Text("Choose the app theme")
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .frame(width: 10, height: 10)
+                            .foregroundColor(themes[self.theme.themeSettings].themeColor)
+                    }
+                 ) {
+                    //List {
+                        ForEach(themes, id: \.id) { item in
+                            Button(action: {
+                                self.theme.themeSettings = item.id
+                                UserDefaults.standard.set(self.theme.themeSettings, forKey: "Theme")
+                            }) {
+                                HStack {
+                                    Image(systemName: "circle.fill")
+                                        .foregroundColor(item.themeColor)
+                                        
+                                    Text(item.themeName)
+                                }
+                            } //: Button
+                            .accentColor(Color.primary)
+                        }
+                    //}
+                } //: SECTION 2
+                .padding(.vertical, 2)
+                
+                // MARK: - SECTION 3
                 Section {
                     NavigationLink {
                         ThemeView(themeMode: isDarkMode ? .constant("Dark") : .constant("Light"))
@@ -102,7 +135,7 @@ private extension SettingsView {
                                 .foregroundColor(.secondary)
                         }
                     }
-                }
+                } //: SECTION 3
                 
                 // Neue Security-Section mit Face ID Toggle
                 Section(header: Text("Sicherheit")) {
@@ -146,8 +179,9 @@ private extension SettingsView {
             .listStyle(.insetGrouped)
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.large)
-        }
+        } //: NAVIGATION END
         .infinityFrame()
+        .accentColor(themes[self.theme.themeSettings].themeColor)
         .background(Color.appTheme.viewBackground)
     }
     
@@ -186,7 +220,6 @@ struct ThemeView: View {
         }
         .navigationTitle("Darstellung")
         
-            
     }
 }
 struct IconView: View {
