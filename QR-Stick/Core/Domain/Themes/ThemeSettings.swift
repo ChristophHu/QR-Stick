@@ -9,13 +9,12 @@ import SwiftUI
 import Combine
 
 final class ThemeSettings: ObservableObject {
-    @Published var themeSettings: Int {
+    @Published var themeSettings: Int = UserDefaults.standard.integer(forKey: "Theme") {
         didSet {
             UserDefaults.standard.set(self.themeSettings, forKey: "Theme")
         }
     }
 
-    init() {
-        self.themeSettings = UserDefaults.standard.integer(forKey: "Theme")
-    }
+    private init() {}
+    public static let shared = ThemeSettings()
 }

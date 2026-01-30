@@ -16,7 +16,7 @@ struct SettingsView: View {
     @State private var authErrorMessage: String = ""
     
     let themes: [Theme] = themeData
-    @ObservedObject var theme = ThemeSettings()
+    @ObservedObject var theme = ThemeSettings.shared
     
     private let alternateAppIcons: [String] = [
         "AppIcon-Backpack",
