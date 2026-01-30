@@ -44,7 +44,7 @@ private extension WelcomeView {
     }
 
     var welcomeImage: some View {
-        Image("hello")
+        Image("LaunchScreen")
             .resizable()
             .scaledToFit()
             .frame(maxWidth: .infinity)

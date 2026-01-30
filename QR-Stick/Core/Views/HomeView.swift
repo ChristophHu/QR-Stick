@@ -55,7 +55,7 @@ struct ProfileView: View {
         //NavigationStack {
             VStack(spacing: 0) {
                 HStack {
-                    Image("hello")
+                    Image("LaunchScreen")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 120, height: 80)

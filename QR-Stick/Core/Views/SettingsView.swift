@@ -85,6 +85,44 @@ private extension SettingsView {
                     }
                  ) {
                     //List {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(themes, id: \.id) { item in
+                                Button {
+                                    withAnimation { theme.themeSettings = item.id }
+                                } label: {
+                                    HStack(spacing: 8) {
+                                        Circle()
+                                            .fill(item.themeColor)
+                                            .frame(width: 12, height: 12)
+                                        Text(item.themeName)
+                                            .font(.subheadline)
+                                            .lineLimit(1)
+                                    }
+                                    .padding(.vertical, 8)
+                                    .padding(.horizontal, 12)
+                                    .background(
+                                        Group {
+                                            if theme.themeSettings == item.id {
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .fill(item.themeColor.opacity(0.18))
+                                            } else {
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .fill(Color.clear)
+                                            }
+                                        }
+                                    )
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(theme.themeSettings == item.id ? item.themeColor : Color.secondary.opacity(0.25), lineWidth: 1)
+                                    )
+                                    .foregroundColor(theme.themeSettings == item.id ? item.themeColor : Color.primary)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                        .padding(.vertical, 6)
+                    }
                         ForEach(themes, id: \.id) { item in
                             Button(action: {
                                 self.theme.themeSettings = item.id
