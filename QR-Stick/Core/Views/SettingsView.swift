@@ -19,12 +19,11 @@ struct SettingsView: View {
     @ObservedObject var theme = ThemeSettings.shared
     
     private let alternateAppIcons: [String] = [
-        "AppIcon-Backpack",
-        "AppIcon-Camera",
-        "AppIcon-Campfire",
-        "AppIcon-Glass",
-        "AppIcon-Map",
-        "AppIcon-Mushroom"
+        "AppIcon",
+        "AppIcon-Wo",
+        "AppIcon-Dark",
+        "AppIcon-Wo-Dark",
+        "AppIcon-Black"
     ]
     
     var body: some View {
